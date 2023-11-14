@@ -1,7 +1,6 @@
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 const API_URL = "https://project-management-api-4641927fee65.herokuapp.com";
 
@@ -36,47 +35,44 @@ function CreateProjectPage() {
                 console.log("Error creating project in the API...");
                 console.log(error);
             })
-        
     }
 
 
+    return (
+        <div className="CreateProjectPage">
+            <h3>Add Project</h3>
 
-  return (
-    <div className="CreateProjectPage">
-      <h3>Add Project</h3>
+            <form onSubmit={handleSubmit}>
+                
+                <label>
+                    Title
+                    <input 
+                        type="text" 
+                        name="title" 
+                        placeholder="enter the title"
+                        required={true}
+                        value={title}
+                        onChange={(e) => { setTitle(e.target.value) }}
+                        />
+                </label>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          Title
-          <input
-            type="text"
-            name="title"
-            placeholder="enter the title"
-            required={true}
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-        </label>
+                <label>
+                    Description
+                    <input 
+                        type="text" 
+                        name="description" 
+                        placeholder="short description"
+                        value={description}
+                        onChange={(e) => { setDescription(e.target.value) }}
+                        />
+                </label>
 
-        <label>
-          Description
-          <input
-            type="text"
-            name="description"
-            placeholder="short description"
-            value={description}
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          />
-        </label>
 
-        <button>Create Project</button>
-      </form>
-    </div>
-  );
+                <button>Create Project</button>
+            </form>
+
+        </div>
+    )
 }
 
 export default CreateProjectPage;
