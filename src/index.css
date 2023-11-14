@@ -37,14 +37,19 @@ textarea {
   box-shadow: 0px 1px 2px gray;
   width: 100%;
   margin-bottom: 15px;
-  padding: 5px;
+  padding: 1rem;
+  text-align: center;
 }
 
-.Navbar li {
-  list-style: none;
+.Navbar a {
   color: white;
-  font-size: 24px;
-  font-weight: 600;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.Navbar a.active {
+  color: rgb(0, 22, 95);
+  padding: 1rem;
 }
 
 .card {

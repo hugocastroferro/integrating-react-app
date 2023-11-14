@@ -1,11 +1,21 @@
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import ProjectListPage from "./pages/ProjectListPage";
+
 function App() {
   return (
     <>
       <div className="App">
-        <h1>Hello World</h1>
+        <Navbar />
+
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectListPage />} />
+        </Routes>
       </div>
     </>
-  )
+  );
 }
 
 export default App;
