@@ -29,19 +29,26 @@ function ProjectListPage() {
 
   return (
     <div className="ProjectListPage">
-      <h2>List of projects:</h2>
+        <h2>List of projects:</h2>
 
-      {projects.map((project) => {
-        return (
-          <div className="ProjectCard card" key={project.id}>
-            <Link to={`/projects/${project.id}`}>
-              <h3>{project.title}</h3>
-            </Link>
-          </div>
-        );
-      })}
+        <Link to="/projects/create">
+            <p>
+            <button>Create Project</button>
+            </p>
+        </Link>      
+
+        {projects.map((project) => {
+            return (
+                <div className="ProjectCard card" key={project.id} >
+                    <Link to={`/projects/${project.id}`}>
+                        <h3>{project.title}</h3>
+                    </Link>
+                </div>
+            );
+        })} 
+
     </div>
-  );
+)
 }
 
 export default ProjectListPage;
