@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const API_URL = "https://project-management-api-4641927fee65.herokuapp.com";
 
@@ -10,14 +10,14 @@ function EditProjectPage(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    const {projectId} =  useParams();
+    const { projectId } = useParams();
 
     const navigate = useNavigate();
 
     useEffect(() => {
         // GET /project/:projectId
         axios.get(`${API_URL}/projects/${projectId}`)
-            .then( response => {
+            .then(response => {
                 setTitle(response.data.title);
                 setDescription(response.data.description);
             })
@@ -30,17 +30,17 @@ function EditProjectPage(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        
+
         // prepare an object with the data that we send to the api
         const requestBody = {
             title: title,
             description: description
         }
 
-            // send PUT request
+        // send PUT request
         axios.put(`${API_URL}/projects/${projectId}`, requestBody)
-            .then( response => {
-                navigate("/projects");
+            .then(response => {
+                navigate(`/projects/${projectId}`);
             })
             .catch((error) => {
                 console.log("Error updating project...");
@@ -48,6 +48,17 @@ function EditProjectPage(props) {
             })
     }
 
+
+    const deleteProject = () => {
+        axios.delete(`${API_URL}/projects/${projectId}`)
+            .then( response => {
+                navigate("/projects");
+            })
+            .catch((error) => {
+                console.log("Error deleting project...");
+                console.log(error);
+            })
+    }
 
     return (
         <div className="EditProjectPage">
@@ -76,12 +87,13 @@ function EditProjectPage(props) {
                     />
                 </label>
 
-
                 <button type="submit">Update Project</button>
             </form>
+
+            <button onClick={deleteProject}>Delete Project</button>
+
         </div>
     );
 }
 
 export default EditProjectPage;
-
